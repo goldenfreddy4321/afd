@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wireframe AU.RAIN</title>
+  <style>
+    body {
+      background-color: black;
+      color: yellow;
+      font-family: monospace;
+      margin: 0;
+      overflow: hidden;
+    }
+    .text-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6vw;
+      
+    }
+    canvas {
+      display: block;
+    }
+    .line {
+      width: 100%;
+      border-top: 4px solid yellow;
+      margin: 1vh 0;
+    }
+    .glitch {
+      white-space: pre;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="wireframe"></canvas>
+  <div class="text-layer">
+    <div class="glitch">¬#172;¥ª'-ýÿ¬­îî¨¨#'°</div>
+    <div class="line"></div>
+    <div>17%</div>
+    <div class="line"></div>
+    <div style="font-weight: bold;">AU.RAIN</div>
+    <div>0.1b</div>
+    <div class="line"></div>
+    <div class="glitch"><a href="gate3_4.html">:!;¬É¬ÊËÏ'«ÿÞí¢£‡¥ª"¬ýÿ¬­îî¨¨#'°</a></div>
+    <div class="glitch">òº»/Üª«ÎÏ¬­±×¥‡#¦J·$,ÿ­Üÿ½¼¿</div>
+    <div class="glitch">°¼½(¬°±)Þÿ²^Æ«.»µJ+Ç¿ª¬#¨Õ‚-¡¢</div>
+    <div class="glitch">µgÎÎ¹¤¥#!,¹§õñõñ.Ç</div>
+    <div class="line"></div>
+    <div>0:40:33 PM</div>
+    <div class="line"></div>
+    <div class="glitch">-°±2^^ª³¨^^µÞ¦},·°Þ¦°ÊÏ:Í¬ÎÏ>>/ÐÑé</div>
+    <div class="glitch">¾­ÿ¡¢Ü¼¿£#¥;»Ê£´ÿ°!¤ª¬;Ê</div>
+    <div class="glitch">öÿ«ûµ**@µx!</div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('wireframe');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      drawWireframe();
+    }
+
+    function drawWireframe() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'yellow';
+      ctx.lineWidth = 1;
+
+      const spacing = 20;
+      const cols = Math.floor(canvas.width / spacing);
+      const rows = Math.floor(canvas.height / spacing);
+
+      for (let y = 0; y < rows; y++) {
+        ctx.beginPath();
+        for (let x = 0; x < cols; x++) {
+          const xPos = x * spacing;
+          const yPos = y * spacing + Math.sin(x * 0.5 + y * 0.3) * 10;
+          if (x === 0) ctx.moveTo(xPos, yPos);
+          else ctx.lineTo(xPos, yPos);
+        }
+        ctx.stroke();
+      }
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+  </script>
+</body>
+</html>

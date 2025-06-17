@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Forum</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    .post {
+      border: 1px solid white;
+      margin: 20px auto;
+      padding: 15px;
+      width: 80%;
+      text-align: left;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .username {
+      font-weight: bold;
+      color: red;
+      margin-bottom: 5px;
+    }
+
+    .timestamp {
+      font-size: 0.9em;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .content {
+      white-space: pre-wrap;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: red;
+      text-shadow: 0 0 5px white;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: white;
+    }
+
+    .login-button,
+    .logout-button {
+      background-color: red;
+      color: white;
+      padding: 9px 16px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-family: "Courier New", monospace;
+      box-shadow: 0 0 5px red;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .login-button:hover,
+    .logout-button:hover {
+      background-color: white;
+      color: red;
+      box-shadow: 0 0 10px white;
+    }
+
+    .login-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .new-post {
+      width: 80%;
+      margin: 30px auto;
+      text-align: left;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border: 1px solid red;
+      border-radius: 8px;
+      box-shadow: 0 0 10px red;
+    }
+
+    .new-post textarea {
+      width: 100%;
+      height: 100px;
+      background-color: black;
+      color: red;
+      border: 1px solid red;
+      padding: 10px;
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+    }
+
+    .new-post button {
+      background-color: red;
+      color: black;
+      padding: 10px;
+      border: none;
+      margin-top: 10px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .new-post button:hover {
+      background-color: white;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container" id="auth-buttons">
+    <a href="login.html" class="login-button" id="login-btn">Login</a>
+    <button class="logout-button" id="logout-btn" style="display:none;">Logout</button>
+  </div>
+
+  <header>
+    <h1>Forum</h1>
+    <p></p>
+  </header>
+
+  <div class="new-post" id="new-post-area" style="display: none;">
+    <textarea id="comment-text" placeholder="Escreva aqui..."></textarea>
+    <button id="post-btn">Postar</button>
+  </div>
+
+  <div id="posts"></div>
+
+  <footer>
+    <p>&copy; United We Stronger!</p>
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <!-- Script Corrigido -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB69hWpLoGOnlq8CS3mgtvBPX72uJfyExE",
+      authDomain: "afd-322b1.firebaseapp.com",
+      projectId: "afd-322b1",
+      storageBucket: "afd-322b1.appspot.com",
+      messagingSenderId: "734419211048",
+      appId: "1:734419211048:web:636eca3cfd85696bc1b61d"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    const newPostArea = document.getElementById("new-post-area");
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const postBtn = document.getElementById("post-btn");
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        newPostArea.style.display = "block";
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+      } else {
+        newPostArea.style.display = "none";
+        loginBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+      }
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      auth.signOut();
+    });
+
+    postBtn.addEventListener("click", postComment);
+
+    function postComment() {
+      const content = document.getElementById("comment-text").value.trim();
+      if (!content) {
+        alert("Digite algo antes de postar.");
+        return;
+      }
+
+      const user = auth.currentUser;
+      if (!user) {
+        alert("Você precisa estar logado para postar.");
+        return;
+      }
+
+      db.collection("posts").add({
+        username: user.email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        content: content
+      }).then(() => {
+        console.log("Comentário postado com sucesso!");
+        document.getElementById("comment-text").value = "";
+      }).catch(error => {
+        console.error("Erro ao postar comentário:", error);
+        alert("Erro ao postar comentário.");
+      });
+    }
+
+    function loadPosts() {
+      const postsDiv = document.getElementById("posts");
+
+      db.collection("posts")
+        .orderBy("timestamp", "desc")
+        .onSnapshot(snapshot => {
+          postsDiv.innerHTML = "";
+
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            if (!data.timestamp) return;
+
+            const time = data.timestamp.toDate().toLocaleString();
+            const post = `
+              <div class="post">
+                <div class="username">${data.username}</div>
+                <div class="timestamp">${time}</div>
+                <div class="content">${data.content}</div>
+              </div>
+            `;
+            postsDiv.innerHTML += post;
+          });
+        });
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>

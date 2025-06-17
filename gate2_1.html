@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Midgnight</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: crimson;
+      text-shadow: 0 0 10px crimson;
+    }
+
+    .puzzle {
+      margin-top: 50px;
+      font-size: 1.2em;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input[type="text"] {
+      background: black;
+      border: 1px solid crimson;
+      color: white;
+      padding: 10px;
+      font-size: 1em;
+      text-align: center;
+      width: 300px;
+      margin-top: 20px;
+    }
+
+    button {
+      background: crimson;
+      border: none;
+      color: black;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: limegreen;
+    }
+  </style>
+</head>
+<body>
+  <h1>Midnight</h1>
+
+  <div class="puzzle" id="puzzle">
+    <p>"EHN 953. Números gravados em pedra. Uma chave oculta espera por olhos atentos."</p>
+    <p><strong>LYP</strong></p>
+  </div>
+
+  <input type="text" id="resposta" placeholder="Insere o número...">
+  <br>
+  <button onclick="verificar()">Verificar</button>
+
+  <div class="result" id="output"></div>
+
+  <script>
+    function verificar() {
+      const resposta = document.getElementById("resposta").value.trim();
+      const correta = "387"; // 12+25+16 = 53 * 7 + 16
+
+      if (resposta === correta) {
+        document.getElementById("output").innerText = "Avanço permitido.";
+      } else {
+        document.getElementById("output").innerText = "Tenta novamente.";
+      }
+    }
+
+    
+  </script>
+
+</body>
+</html>

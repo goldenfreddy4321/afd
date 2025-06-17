@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Porta de Mistérios</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hidden {
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+
+    .reveal {
+      opacity: 1;
+    }
+
+    h1 {
+      color: crimson;
+      font-size: 3em;
+      margin-bottom: 0.5em;
+      letter-spacing: 0.1em;
+    }
+
+    .message, .code, .note {
+      margin: 20px;
+      max-width: 600px;
+      line-height: 1.6em;
+    }
+
+    .numbers {
+      font-size: 2em;
+      color: crimson;
+      letter-spacing: 0.3em;
+    }
+
+    .rcode {
+      font-size: 2em;
+      color: white;
+      letter-spacing: 0.5em;
+      margin-top: 10px;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.8em;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="hidden">Paços em Frente</h1>
+
+  <div class="message hidden">
+    Os números caminham em silêncio </br>
+    Cada um guardando o nome de uma letra esquecida
+  </div>
+
+
+  <div class="numbers hidden">
+    1 24 14 2 6
+  </div>
+
+
+
+ <footer class="hidden">
+  <a href="gate1_1.html" style="color: inherit; text-decoration: none;">
+    Abre a próxima porta...
+  </a>
+</footer>
+
+
+  <script>
+    const elements = document.querySelectorAll('.hidden');
+    let delay = 0;
+    elements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('reveal');
+      }, delay);
+      delay += 2000;
+    });
+  </script>
+</body>
+</html>

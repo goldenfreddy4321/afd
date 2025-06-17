@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+<script>
+  // Sua configuração do Firebase
+  const firebaseConfig = {
+
+  apiKey: "AIzaSyB69hWpLoGOnlq8CS3mgtvBPX72uJfyExE",
+
+  authDomain: "afd-322b1.firebaseapp.com",
+
+  projectId: "afd-322b1",
+
+  storageBucket: "afd-322b1.firebasestorage.app",
+
+  messagingSenderId: "734419211048",
+
+  appId: "1:734419211048:web:636eca3cfd85696bc1b61d"
+
+};
+
+
+  // Inicializar Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+  <meta charset="UTF-8">
+  <title>Criar Conta - Hacker Attacks Forum</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid red;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px red;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: white;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid red;
+      border-radius: 4px;
+      background-color: black;
+      color: red;
+      font-family: "Courier New", monospace;
+    }
+
+    input[type="submit"] {
+      background-color: red;
+      color: black;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 5px red;
+      transition: 0.3s;
+      font-family: "Courier New", monospace;
+    }
+
+    input[type="submit"]:hover {
+      background-color: white;
+      color: red;
+      box-shadow: 0 0 10px white;
+    }
+
+    .back-link {
+      margin-top: 15px;
+    }
+
+    .back-link a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      color: red;
+      text-shadow: 0 0 5px white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Criar Conta</h1>
+  <form action="#" method="post">
+
+    <label for="email">Nome(acaba em @hacker.forum):</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirm-password">Confirmar Senha:</label>
+    <input type="password" id="confirm-password" name="confirm-password" required>
+
+    <input type="submit" value="Registrar">
+  </form>
+
+  <div class="back-link">
+    <a href="login.html">← Já tem conta? Faça login</a><br>
+    <a href="gate4.html">← Voltar ao fórum</a>
+</div>
+
+<script>
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form["confirm-password"].value;
+
+    if (password !== confirmPassword) {
+      alert("As senhas não coincidem.");
+      return;
+    }
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        alert("Conta criada com sucesso!");
+        window.location.href = "gate4.html"; // Redireciona ao fórum
+      })
+      .catch(error => {
+        alert("Erro: " + error.message);
+      });
+  });
+</script>
+
+
+
+</body>
+</html>

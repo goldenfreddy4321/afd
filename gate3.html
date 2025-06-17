@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+    }
+
+    .container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      /*Na hora de explicar mudar a linha 35 para red(255,05,05) */
+
+      background-color: red; /* vermelho suave */
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hotspot:hover {
+      background-color: rgba(255, 0, 0, 0.5); /* realce ao passar o rato */
+    }
+
+    /* Coordenadas dos pontos com base na imagem enviada */
+    .point1 {
+      top: 120px;
+      left: 420px;
+    }
+
+    .point2 {
+      top: 260px;
+      left: 605px;
+    }
+
+    .point3 {
+      top: 510px;
+      left: 1130px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="b.jpg" alt="Imagem com pontos clicáveis">
+
+    <a href="gate3_1.html" class="hotspot point1" title="Página 1"></a>
+    <a href="https://wwwwwwwww.jodi.org/" class="hotspot point2" title="Página 2"></a>
+    <a href="https://www.cameronsworld.net/" class="hotspot point3" title="Página 3"></a>
+  </div>
+</body>
+</html>

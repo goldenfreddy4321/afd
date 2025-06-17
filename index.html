@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bem Vindo</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      padding: 50px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 20px;
+      font-size: 1.2em;
+    }
+    a:hover {
+      color: red;
+      text-shadow: 0 0 5px white;
+    }
+    .hidden {
+      color: black;
+    }
+    .reverse {
+      transform: scaleX(-1);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <!--Atenção se quiserem aceder ao site instalem extensão "Live Server no vscode"-->  
+  <h1>Bem Vindo</h1>
+  <p>Será que tens o que é preciso?</p>
+
+  <a href="gate1.html">gate 1</a>
+  <a href="#" onclick="djabusabi()">gate 2</a>
+  <a href="#" onclick="ferramenta()">gate 3</a>
+  <a href="gate4_1.html">gate 4</a>
+  <a href="#" onclick="ferramenta1()">gate 5</a>
+
+  <div class="hidden">
+    code: 42.3.18.7
+  </div>
+
+  <!--
+    PISTA: nem todos os caminhos dentro dos portões levam à luz.
+    PISTA: o codigo da gate 5 está mais perto do que pensão
+  -->
+
+  <footer>
+    <p><span class="reverse">.edaced ruoy nopu noitca si emit</span></p>
+  </footer>
+
+  <script>
+    function djabusabi() {
+      var x = ["QVhOQkY=", "cHJvbXB0", "SW50cm9kdXogaWwgY8OzZGlnbyBkZSBhY2Vzc286"];
+      var input = window[atob(x[1])](atob(x[2]));
+      if (input === atob(x[0])) {
+        location.href = "gate2.html";
+      } else {
+        alert("Código incorreto.");
+      }
+    }
+
+    function ferramenta() {
+      var y = ["VHhvdXNlbjE=", "cHJvbXB0", "SW50cm9kdXogaWwgY8OzZGlnbyBkZSBhY2Vzc286"];
+      var inp = window[atob(y[1])](atob(y[2]));
+      if (inp === atob(y[0])) {
+        location.href = "gate3.html";
+      } else {
+        alert("Código incorreto.");
+      }
+    }
+
+    function ferramenta1() {
+      var z = ["NDIuMy4xOC43", "cHJvbXB0", "SW50cm9kdXogaWwgY8OzZGlnbyBkZSBhY2Vzc286"];
+      var input = window[atob(z[1])](atob(z[2]));
+      if (input === atob(z[0])) {
+        location.href = "gate5.html";
+      } else {
+        alert("Código incorreto.");
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+</body>
+</html>

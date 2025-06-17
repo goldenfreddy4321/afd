@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Hacker Attacks Forum</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid red;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px red;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: white;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid red;
+      border-radius: 4px;
+      background-color: black;
+      color: red;
+      font-family: "Courier New", monospace;
+    }
+
+    input[type="submit"],
+    .register-button {
+      background-color: red;
+      color: black;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 5px red;
+      transition: 0.3s;
+      font-family: "Courier New", monospace;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"]:hover,
+    .register-button:hover {
+      background-color: white;
+      color: red;
+      box-shadow: 0 0 10px white;
+    }
+
+    .back-link {
+      margin-top: 10px;
+    }
+
+    .back-link a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      color: red;
+      text-shadow: 0 0 5px white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Login</h1>
+
+  <form id="login-form">
+    <label for="email">Nome:</label>
+    <input type="text" id="email" name="email" required>
+
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password" required>
+
+    <input type="submit" value="Entrar">
+
+    <a href="registar.html">
+      <button type="button" class="register-button">Criar Conta</button>
+    </a>
+  </form>
+
+  <div class="back-link">
+    <a href="gate4.html ">← Voltar ao fórum</a>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB69hWpLoGOnlq8CS3mgtvBPX72uJfyExE",
+      authDomain: "afd-322b1.firebaseapp.com",
+      projectId: "afd-322b1",
+      storageBucket: "afd-322b1.appspot.com",
+      messagingSenderId: "734419211048",
+      appId: "1:734419211048:web:636eca3cfd85696bc1b61d"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          alert("Login bem-sucedido!");
+          window.location.href = "gate4.html";
+        })
+        .catch((error) => {
+          alert("Erro ao fazer login: " + error.message);
+        });
+    });
+  </script>
+
+</body>
+</html>
